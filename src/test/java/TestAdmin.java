@@ -26,7 +26,7 @@ public class TestAdmin {
 
     @Test
     public void testCreateClass2() {
-        this.admin.createClass("Test", 2015, "Instructor", 15);
+        this.admin.createClass("Test", 2017, "Instructor", 15);
         assertFalse(this.admin.classExists("Test", 2016));
     }
 
@@ -56,10 +56,17 @@ public class TestAdmin {
     }
 
     @Test
-    public void testCapacityChange() {
+    public void testCorrectCapacityChange() {
         this.admin.createClass("Test", 2017, "Instructor", 30);
         this.admin.changeCapacity("Test", 2017, 50);
         assertTrue(this.admin.getClassCapacity("Test", 2017) == 50);
+    }
+
+    @Test
+    public void testValidCapacityChange() {
+        this.admin.createClass("Test", 2017, "Instructor", 30);
+        this.admin.changeCapacity("Test", 2017, 15);
+        assertFalse(this.admin.getClassCapacity("Test", 2017) == 15);
     }
 
     @Test
